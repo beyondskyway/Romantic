@@ -1,0 +1,72 @@
+.btn_define{
+    background-color:#FF6E8B;
+	color:white;
+	width:65%;
+}
+.more_btn{
+    width:100%;
+	text-align:center;
+	margin:1rem 0;
+}
+.ib:hover,
+.ib:focus,
+.ib.focus {
+  color: #7B7B7B;
+  text-decoration: none;
+}
+.ib:active,
+.ib.active {
+    color: #7B7B7B;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.btn_active{
+     color:#7B7B7B;
+ }
+.btn_define:hover,
+.btn_define:focus,
+.btn_define.focus {
+  color: white;
+  text-decoration: none;
+}
+.btn_define:active,
+.btn_define.active {
+    color: white;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.littlebtn{
+    background-color:#FF6E8B;
+	color:white;
+}
+.littlebtn:hover,
+.littlebtn:focus,
+.littlebtn.focus {
+  color: white;
+  text-decoration: none;
+}
+.littlebtn:active,
+.littlebtn.active {
+    color: white;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+/*报名页面的按钮css*/
+.btn_define2{
+    width:47%;
+    background-color:#FF6E8B;
+    color:white;
+    margin:1rem 0;
+}
+.btn_wide{
+    width:100%;
+    margin-bottom: 40px;
+    background-color: #FF6E8B;
+    color: white;
+}

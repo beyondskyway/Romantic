@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+<style>
+body{
+    background-color: #4E5359;
+	font:14px/1.5  Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin: 0;
+    padding: 0;
+    }
+.pic{
+    margin:0 auto;
+    text-align:center;
+    width: 301px;
+}
+.pic img{border:none;
+	-webkit-box-shadow: 0 4px 3px 2px #333333;
+    box-shadow:1px 3px 2px #333333;<!--0是x-offset，40是y-offset，3px是模糊值，#333333是阴影颜色-->
+	-webkit-border-radius:5px;
+	border-radius:5px;
+    width: 100%;}
+h3{
+    font-size:26px; color:#f5f5f5; font-weight:normal; text-align: center; margin:20px 0 20px 0; text-shadow:0 1px 3px #111111;
+    }
+.content{color: #B4B7BC; font-size:14px;padding:5px;width:300px; margin:0 auto;text-shadow: 0 -1px 0 #111112; display:block;}
+@media screen and (max-width:320px){
+    .pic{ width:90%; margin-top:20px;}
+    .content {padding: 0;width: 90%;}
+    h1{ display:none}
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="pic">
+                <h3>武汉高校之恋</h3>
+
+        <img src="http://static-juewangpo.qiniudn.com/imgqrcode.jpg">
+
+
+	</div>
+
+	<div class="content">
+	<p>
+    <small>请使用微信扫一扫上面二维码，或搜索公众号“武汉高校之恋”加入我们~</small><br/><br/>
+    这里有来自武汉十余所高校的五千关注者，100多位嘉宾资料，以及人人参与的微社区和匹配社区~
+
+	</p>
+	</div>
+    </div>
+
+{% endblock %}

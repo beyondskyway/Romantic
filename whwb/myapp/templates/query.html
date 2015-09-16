@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+    <script>
+        function showHint(str) {
+            var xmlhttp;
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "/ajax/query/" + str, true);
+            xmlhttp.send();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% include '/manage/manage.html' %}
+    <h3>个人页面查询</h3>
+    {% include 'flash.html' %}
+    <div class="well">
+        <h4>输入匹配系统注册时的邮箱号：</h4>
+
+        <form>
+            <input type="text" name="email" class="form-control" style="max-width: 300px;"
+                   onkeyup="showHint(this.value)"/>
+        </form>
+        <div>
+            <h4>个人资料网址(复制到素材管理的“原文链接”即可)：</h4>
+            <span id="txtHint" style="color:red;font-size: 20px;"></span>
+        </div>
+    </div>
+{% endblock %}

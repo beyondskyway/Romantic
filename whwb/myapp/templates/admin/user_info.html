@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/edit.css">
+{% endblock %}
+
+{% block content %}
+    {% include '/admin/admin.html' %}
+    <form class="form-horizontal" action="" method="post" name="activity_info">
+        <!-- page_two end -->
+        <div id="edit_page" class="page_two pl10 pr10">
+            <h2>用户查询</h2>
+            <hr/>
+            {% include 'flash.html' %}
+            <div class="input-group mt10">
+                <h4>输入用户QQ号或手机号:</h4>
+                <input class="form-control " id="query" name="query"/>
+            </div>
+            <footer>
+                <button id="query" type="submit" class="btn btn-success" style="float: right">查询</button>
+            </footer>
+            <br/><br/>
+            <!-- edit_info start -->
+            {% if users %}
+                <div class="activity brief">
+                    <h4>用户信息<span class="glyphicon glyphicon-book"></span></h4>
+                </div>
+                <table border="1" style="text-align: center; font-size: 12px; width: 800px;background-color: #dff0d8">
+                    <tr style="height: 40px;">
+                        <td>编号</td>
+                        <td>Q Q</td>
+                        <td>密码</td>
+                        <td>姓名</td>
+                        <td>昵称</td>
+                        <td>电话</td>
+                        <td>性别</td>
+                        <td>年龄</td>
+                        <td>身高</td>
+                        <td>单位</td>
+                        <td>月薪</td>
+                        <td>房车</td>
+                        <td>学历</td>
+                        <td>婚姻状态</td>
+                    </tr>
+                    {% for user in users %}
+                    <tr style="height: 25px;">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.qq }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.nickname }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.sex }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.height }}</td>
+                        <td>{{ user.department }}</td>
+                        <td>{{ user.income }}</td>
+                        <td>{{ user.condition }}</td>
+                        <td>{{ user.degree }}</td>
+                        <td>{{ user.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+        <!-- page_two end -->
+    </form>
+{% endblock %}

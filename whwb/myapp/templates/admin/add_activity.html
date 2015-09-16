@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/edit.css">
+{% endblock %}
+
+{% block content %}
+{% include '/admin/admin.html' %}
+{% include 'flash.html' %}
+<form class="form-horizontal" action="" method="post" name="add_activity">
+    {{ form.hidden_tag() }}
+    <!-- page_two end -->
+    <div id="edit_page" class="page_two pl10 pr10">
+        <h2>添加活动</h2>
+        <hr/>
+        <div class="input-group mt10">
+            <span class="input-group-addon">名称</span>
+            {{ form.name (class="form-control", placeholder="请输入活动名称（3-30字）") }}
+        </div>
+        {% for error in form.errors.name %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <div class="input-group mt10">
+            <span class="input-group-addon">时间</span>
+            {{ form.time (class="form-control", placeholder="请输入活动时间（2-40字）") }}
+        </div>
+        {% for error in form.errors.time %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <div class="input-group mt10">
+            <span class="input-group-addon">地点</span>
+            {{ form.address (class="form-control", placeholder="请输入活动地点（2-40字）") }}
+        </div>
+        {% for error in form.errors.address %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <div class="input-group mt10">
+            <span class="input-group-addon">嘉宾</span>
+            {{ form.guest (class="form-control", placeholder="请输入活动嘉宾（2-40字）") }}
+        </div>
+        {% for error in form.errors.guest %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <div class="input-group mt10">
+            <span class="input-group-addon">海报</span>
+            {{ form.poster_url (class="form-control", placeholder="请输入海报链接（1-200字符）") }}
+        </div>
+        {% for error in form.errors.poster_url %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <div class="self_introduction mb10">
+            <h4>活动简介</h4>
+            {{ form.introduce (class="form-control", rows=5, maxlength=300, placeholder="请输入活动简介（500字以内）") }}
+        </div>
+        {% for error in form.errors.introduce %}
+            <span style="color:red;">[{{ error }}]</span><br/>
+        {% endfor %}
+        <footer>
+            <button id="add" type="submit" class="btn btn-success" style="float: right">添加活动</button>
+        </footer>
+    </div>
+</form>
+{% endblock %}

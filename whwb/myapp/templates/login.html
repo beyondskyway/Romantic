@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block head %}
+   {{ super() }}
+    <link rel="stylesheet" href="/static/css/edit.css">
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" role="form" action="" method="post" name="edit">
+    <!-- page_one start -->
+    <div class="header hei4">
+        <div class="left back" onclick="javascript:history.back(-1)">
+            <span><i class="iconfont">&#xf007a;</i></span>
+        </div>
+        <div class="private">登录</div>
+    </div>
+    <div style="height:4rem;"></div>
+    <div id="page_one" class="page_one pl5 pr5 ">
+		<hr/>
+		<!-- login_info start -->
+		<div class="login_info">
+            {{ form.hidden_tag() }}
+            {% include 'flash.html' %}
+			<div class="input-group mt15">
+			    <span class="input-group-addon">Q Q</span>
+                {{ form.qq(class="form-control", placeholder="请输入QQ号") }}
+			</div>
+            <div id="qqRight" class="al"></div>
+            {% for error in form.errors.qq %}
+                <span style="color:red;">[{{ error }}]</span><br/>
+            {% endfor %}
+			<div class="input-group mt15">
+			    <span class="input-group-addon ">密码</span>
+                {{ form.password(class="form-control", placeholder="请输入密码") }}<br/>
+			</div>
+            <div id="passwordRight" class="al"></div>
+            {% for error in form.errors.password %}
+                <span style="color:red;">[{{ error }}]</span><br/>
+            {% endfor %}
+            <br/>
+            <br/>
+            <button id="submit" type="submit" class="btn btn_wide">登录</button>
+            <a id="register" href="{{ url_for('registry') }}" style="float: left">注册</a>
+            <a id="forgetpwd" href="{{ url_for('forget_pwd') }}" style="float: right">忘记密码？</a>
+		</div>
+	</div>
+    <!-- page_one end -->
+</form>
+<script src="/static/js/checkData.js"></script>
+{% endblock %}

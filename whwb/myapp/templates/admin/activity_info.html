@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/edit.css">
+{% endblock %}
+
+{% block content %}
+    {% include '/admin/admin.html' %}
+    {% include 'flash.html' %}
+    <form class="form-horizontal" action="" method="post" name="activity_info">
+        <!-- page_two end -->
+        <div id="edit_page" class="page_two pl10 pr10">
+            <h2>活动信息</h2>
+            <hr/>
+            <div class="input-group mt10">
+                <span class="input-group-addon">名称</span>
+                <select class="form-control" id="name" name="name">
+                    {% for activity in activities %}
+                        <option value="{{ activity.name }}">{{ activity.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <footer>
+                <button id="query" type="submit" class="btn btn-success" style="float: right">查询</button>
+            </footer>
+            <br/><br/>
+            <!-- edit_info start -->
+            {% if activity %}
+                <div class="activity_information">
+                    <div class="activity information">
+                        <h4>活动名称<span class="glyphicon glyphicon-time"></span></h4>
+
+                        <p>{{ activity.name }}</p>
+                    </div>
+                    <div class="activity information">
+                        <h4>活动时间<span class="glyphicon glyphicon-time"></span></h4>
+
+                        <p>{{ activity.time }}</p>
+                    </div>
+                    <div class="activity place">
+                        <h4>活动地点<span class="glyphicon glyphicon-map-marker"></span></h4>
+
+                        <p>{{ activity.address }}</p>
+                    </div>
+                    <div class="activity guest">
+                        <h4>现场嘉宾<span class="glyphicon glyphicon-user"></span></h4>
+
+                        <p>{{ activity.guest }}</p>
+                    </div>
+                    <div class="activity brief">
+                        <h4>活动简介<span class="glyphicon glyphicon-book"></span></h4>
+
+                        <p>{{ activity.introduce }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            {% if paticipators %}
+                <div class="activity brief">
+                    <h4>报名信息<span class="glyphicon glyphicon-book"></span></h4>
+                </div>
+                <table border="1" style="text-align: center; font-size: 12px; width: 1200px;background-color: #dff0d8">
+                    <tr style="height: 40px;">
+                        <td>编号</td>
+                        <td>姓名</td>
+                        <td>身份证号</td>
+                        <td>昵称</td>
+                        <td>电话</td>
+                        <td>Q Q</td>
+                        <td>性别</td>
+                        <td>年龄</td>
+                        <td>身高</td>
+                        <td>单位</td>
+                        <td>月薪</td>
+                        <td>房车</td>
+                        <td>学历</td>
+                        <td>婚姻状态</td>
+                    </tr>
+                    {% for paticipator in paticipators %}
+                    <tr style="height: 25px;">
+                        <td>{{ paticipator.id }}</td>
+                        <td>{{ paticipator.actor.name }}</td>
+                        <td>{{ paticipator.actor.identity_id }}</td>
+                        <td>{{ paticipator.actor.nickname }}</td>
+                        <td>{{ paticipator.actor.phone }}</td>
+                        <td>{{ paticipator.actor.qq }}</td>
+                        <td>{{ paticipator.actor.sex }}</td>
+                        <td>{{ paticipator.actor.age }}</td>
+                        <td>{{ paticipator.actor.height }}</td>
+                        <td>{{ paticipator.actor.department }}</td>
+                        <td>{{ paticipator.actor.income }}</td>
+                        <td>{{ paticipator.actor.condition }}</td>
+                        <td>{{ paticipator.actor.degree }}</td>
+                        <td>{{ paticipator.actor.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+        <!-- page_two end -->
+    </form>
+{% endblock %}

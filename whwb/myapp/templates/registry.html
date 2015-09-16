@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/edit.css">
+{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" role="form" action="" method="post" name="edit">
+        <!-- page_one start -->
+        <div class="header hei4">
+            <div class="left back" onclick="javascript:history.back(-1)">
+                <span><i class="iconfont">&#xf007a;</i></span>
+            </div>
+            <div class="private">注册</div>
+        </div>
+        <div style="height:4rem;"></div>
+        <div id="page_one" class="page_one pl5 pr5 ">
+            <hr/>
+            <!-- login_info start -->
+            <div class="login_info">
+                {{ form.hidden_tag() }}
+                {% include 'flash.html' %}
+                <h4>登录信息</h4>
+                <div class="input-group mt15">
+                    <span class="input-group-addon">Q Q</span>
+                    {{ form.qq(class="form-control", placeholder="请输入QQ号") }}
+                </div>
+                <div id="qqRight" class="al"></div>
+                {% for error in form.errors.qq %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt15">
+                    <span class="input-group-addon ">密码</span>
+                    {{ form.password(class="form-control", placeholder="5到20位区分大小写") }}<br/>
+			    </div>
+                <div id="passwordRight" class="al"></div>
+                {% for error in form.errors.password %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <br/>
+                <a href="{{ url_for('login') }}">已有账号，直接登录</a>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div class="next_btn">
+                    <input type="button" id="next_btn" class="btn btn_wide" value="下一步"/>
+                </div>
+            </div>
+            <!-- login_info end -->
+        </div>
+        <!-- page_one end -->
+        <!-- page_two end -->
+        <div id="page_two" class="page_two pl10 pr10">
+            <hr/>
+            <!-- edit_info start -->
+
+            <div class="edit_info">
+                <h4>基本资料</h4>
+                <div class="input-group mt10">
+                    <span class="input-group-addon">昵称</span>
+                    {{ form.nickname (class="form-control", placeholder="2到20位字母、数字或汉字")}}
+                </div>
+                <div id="nicknameRight" class="al"></div>
+                {% for error in form.errors.nickname %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">性别</span>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-default"><input type="radio" name="sex" id="man" value="男"/>男</label>
+                        <label class="btn btn-default"><input type="radio" name="sex" id="woman" value="女"/>女</label>
+                    </div>
+                </div>
+                {% for error in form.errors.sex %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">年龄</span>
+                    {{ form.age (class="form-control", placeholder="16到60间的数值") }}
+                </div>
+                <div id="ageRight" class="al"></div>
+                {% for error in form.errors.age %}
+                    <span style="color:red;">[{{ form.errors.age }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">身高</span>
+                    <input class="form-control" type="number" id="height" name="height" min="100" max="250" value="请输入身高"/>
+                    <span class="input-group-addon">厘米</span>
+                </div>
+                <div id="heightRight" class="al"></div>
+                <div class="input-group mt10">
+                    <span class="input-group-addon">学历</span>
+                    {{ form.degree (class="form-control") }}
+                </div>
+                {% for error in form.errors.degree %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">房车</span>
+                    {{ form.condition (class="form-control") }}
+                </div>
+                {% for error in form.errors.condition %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">单位</span>
+                    {{ form.department (class="form-control", placeholder="2到20个字") }}
+                </div>
+                <div id="departmentRight" class="al"></div>
+                {% for error in form.errors.department %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">月薪</span>
+                    {{ form.income (class="form-control") }}
+                </div>
+                {% for error in form.errors.income %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="input-group mt10">
+                    <span class="input-group-addon">状态</span>
+                    {{ form.status (class="form-control") }}
+                </div>
+                {% for error in form.errors.status %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="self_introduction mb10">
+                    <h4>自我介绍</h4>
+                    {{ form.introduce (class="form-control", maxlength=300, placeholder="300字以内")}}
+                </div>
+                {% for error in form.errors.introduce %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="self_introduction mb10">
+                    <h4>择偶要求</h4>
+                    {{ form.requirement (class="form-control", maxlength=300, placeholder="300字以内")}}
+                </div>
+                {% for error in form.errors.requirement %}
+                    <span style="color:red;">[{{ error }}]</span><br/>
+                {% endfor %}
+                <div class="private">
+                    <h4>私密信息
+                        <small>(仅自己和管理员可见)</small>
+                    </h4>
+                    <div class="input-group mt10">
+                        <span class="input-group-addon">姓名</span>
+                        {{ form.name (class="form-control", placeholder="2到20个字") }}
+                    </div>
+                    <div id="nameRight" class="al"></div>
+                    {% for error in form.errors.name %}
+                        <span style="color:red;">[{{ error }}]</span><br/>
+                    {% endfor %}
+                    <div class="input-group mt10 mb10">
+                        <span class="input-group-addon">手机</span>
+                        {{ form.phone (class="form-control", placeholder="11位数字") }}
+                    </div>
+                    <div id="phoneRight" class="al"></div>
+                    {% for error in form.errors.phone %}
+                        <span style="color:red;">[{{ error }}]</span><br/>
+                    {% endfor %}
+                    <div class="input-group mt10 mb10">
+                        <span class="input-group-addon">身份证</span>
+                        {{ form.identity_id (class="form-control", placeholder="18位身份证号") }}
+                    </div>
+                    <div id="identityRight" class="al"></div>
+                    {% for error in form.errors.identity_id %}
+                        <span style="color:red;">[{{ error }}]</span><br/>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- edit_info end -->
+            <footer>
+                <button id="submit" type="submit" class="btn btn_wide">完成注册</button>
+            </footer>
+        </div>
+        <!-- page_two end -->
+    </form>
+    <script src="/static/js/checkData.js"></script>
+{% endblock %}

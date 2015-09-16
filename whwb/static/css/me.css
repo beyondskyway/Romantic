@@ -1,0 +1,96 @@
+
+.w12{
+    width:12rem;
+	text-align:center;
+	margin-top:2rem;
+}
+.mymes{
+    height:14rem;
+	width:100%;
+	border-bottom:1px solid #E8E5DA;
+    vertical-align:middle; 
+	background-color:#F5F5EB;
+}
+.mymes .w12 img{
+	width:10rem;
+	height:10rem;
+	border-radius:0.5rem;
+}
+.ml12{
+   margin-left:12rem;
+   vertical-align:middle;
+/*    text-align:center; */
+/*    border:1px solid red; */
+   height:14rem;
+   position:relative;
+}
+.height7{
+    height:7.7rem;
+	width:65%;
+/* 	border:1px solid red; */
+}
+.height6{
+    height:6.3rem;
+/* 	border:1px solid black; */
+	vertical-align:middle;
+    text-align:center;
+}
+.nick{
+    line-height:7.7rem;
+	font-size:2rem;
+	padding-left:1rem;
+}
+.re{
+    color:red;
+}
+.pleft{
+    padding-left:0.5rem;
+}
+.good{
+    width:35%;
+/* 	border:1px solid yellow; */
+	height:7.7rem;
+	position:absolute;
+	right:0rem;
+    line-height:7.7rem;
+	top:0rem;
+    text-align:center;
+}
+
+.btn_like{
+    width:50%;
+/* 	border:1px solid blue; */
+	height:6.3rem;
+    text-align:center;
+}
+.h{
+    height:3.3rem;
+	margin-top:1.5rem;
+	width:75%;
+	font-size:1.5rem;
+	background-color:#FF6E8D;
+	color:white;
+	padding:0rem;
+}
+.he{
+	line-height:3.3rem;
+	font-size:1.5rem;
+}
+.basic_mes{
+    border-top:1px solid #F2E0E8;
+    border-bottom:1px solid #F2E0E8;
+	padding:0.5rem;
+	background-color:#FFF6FA;
+}
+.borderB{
+    border-bottom:1px dashed #eee;
+	height:3rem;
+}
+.g5{
+    height:5rem;
+}
+.pad{
+    padding:1rem;
+}
+
+

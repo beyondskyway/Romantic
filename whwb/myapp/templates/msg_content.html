@@ -1,0 +1,49 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/private.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+    <div class="header hei4">
+        <div class="left back" onclick="javascript:history.back(-1)">
+            <span><i class="iconfont">&#xf007a;</i></span>
+        </div>
+        <div class="private">与{{ user.nickname }}的私信</div>
+    </div>
+    <div style="height:4rem;"></div>
+    <form role='form' method='post' active=''>
+        {{ form.hidden_tag() }}
+        <div>
+            {% for message in messages %}
+            <div class="message1 clear">
+                <div class="left w5">
+                    <a href="{{ url_for('profile', user_id = message.author.user_id) }}">
+                        <img src="{{ message.author.avatar_path }}"/>
+                    </a>
+                </div>
+                <div class="mes left">
+                    <div class="b">{{ message.author.nickname }}</div>
+                    <div class="p1">发表于&nbsp;&nbsp;&nbsp;{{ message.timestamp|datetimeformat }}</div>
+                </div>
+                <div class="clear p2">
+                    <p>{{ message.body }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="send_mes">
+            <div class="mess" name="mess">
+                {{ form.message (class="form-control", rows=4, maxlength=500, placeholder="500字以内") }}
+                {% for error in form.errors.message %}
+                    <span class="help-inline">[{{ error }}]</span><br>
+                {% endfor %}
+                <div class="send">
+                    <button class="btn littlebtn right">发送私信</button>
+                </div>
+            </div>
+        </div>
+    <div style="height:4rem;"></div>
+    </form>
+{% endblock %}

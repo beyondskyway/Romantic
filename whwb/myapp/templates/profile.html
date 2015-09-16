@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/iconfont_add.css" rel="stylesheet" />
+    <link href="/static/css/me.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    {% if g.user.user_id == user.user_id %}
+        <div class="header hei5">
+            <div class="me">我的资料</div>
+        </div>
+    {% else %}
+        <div class="header hei4">
+            <div class="left back" onclick="javascript:history.back(-1)" style="height:4rem;width:2rem;z-index:99;">
+                <span><i class="iconfont">&#xf007a;</i></span></div>
+            <div class="me">{{ user.nickname }}的资料</div>
+        </div>
+        <div style="height:4rem;"></div>
+    {% endif %}
+    <div class="mymes clear">
+        <div class="left w12">
+            {% if g.user.user_id == user.user_id %}
+            <a href="{{ url_for('upavatar') }}">
+                <img src="{{ user.avatar_path }}"/>
+            </a>
+            {% else %}
+                <img src="{{ user.avatar_path }}"/>
+            {% endif %}
+        </div>
+        <div class="ml12">
+            <div class="height7 "><p class="nick">{{ user.nickname }}</p></div>
+            <div class="right  good">
+                <p><span  id="count">{{ user.likes }}</span>个<i class="re iconfont_add">&#xe73c;</i></p>
+            </div>
+            <div class="height6 ">
+                {% if g.user.user_id == user.user_id %}
+                <div class="btn_like left">
+                    <a href="{{ url_for('upavatar') }}"><button class="h btn">修改头像</button></a>
+                </div>
+                <div class="btn_like left">
+                    <a href="{{ url_for('edit') }}"><button class="h btn">编辑资料</button></a>
+                </div>
+                {% else %}
+                    <div class="btn_like left">
+                        <button class="h btn">
+                            {% if g.user.is_following(user) %}
+                                <span id="like" class="he">取消</span>
+                            {% else %}
+                                <span id="like" class="he">喜欢</span>
+                            {% endif %}
+                            <i class="iconfont_add ">&#xe73c;</i>
+                        </button>
+                    </div>
+		            <div class="btn_like left">
+                        <a href="{{ url_for('message', user_id=user.user_id) }}" ><button class="h btn">发私信</button></a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="profile_message">
+        <h4 class="pleft">基本资料</h4>
+
+        <div class="basic_mes">
+            <div class="borderB">年龄<span class="right">{{ user.age }}岁</span></div>
+            <div class="borderB">身高<span class="right">{{ user.height }}cm</span></div>
+            <div class="borderB">学历<span class="right">{{ user.degree }}</span></div>
+            <div class="borderB">月收入<span class="right">{{ user.income }}</span></div>
+            <div class="borderB">婚姻状态<span class="right">{{ user.status }}</span></div>
+            <div class="borderB">住房情况<span class="right">{{ user.condition|string|truncate(2,True,'') }}</span></div>
+            <div class="borderB">购车<span class="right">{{ user.condition|string_truncate(start=-2) }}</span></div>
+        </div>
+        <h4 class="pleft">个人介绍</h4>
+        <div class="basic_mes pad">{{ user.introduce }}</div>
+        <h4 class="pleft">对另一半的期望</h4>
+        <div class="basic_mes pad">{{ user.requirement }}</div>
+        <br/>
+        <br/>
+        {% if g.user.user_id == user.user_id %}
+            <a href="{{ url_for('logout') }}">
+                <div class="more_btn">
+                    <button class="btn btn_define"  name="logout" id='logout'>退出</button>
+                </div>
+            </a>
+        {% endif %}
+    </div>
+    <div class="g5"></div>
+    {% if g.user.user_id == user.user_id %}
+    <div class="footer">
+        <a href="{{ url_for('index') }}" class="btn ib">
+            <i class="iconfont">&#xe634;</i><br/>
+            <div class="nav_word">主页</div>
+        </a>
+        <a href="{{ url_for('likes') }}" class="btn ib">
+            <i class="iconfont ">&#xe73c;</i><br/>
+            <div class="nav_word">喜欢</div>
+        </a>
+        <a href="{{ url_for('session') }}" class="btn ib">
+            <i class="iconfont ">&#xe631;</i><br/>
+            <div class="nav_word">私信</div>
+        </a>
+        <a href="{{ url_for('userinfo') }}" class="btn ib btn_active">
+            <i class="iconfont ">&#xe627;</i><br/>
+            <div class="nav_word">我</div>
+        </a>
+    </div>
+    {% endif %}
+    <script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    $(function() {
+        $('span#like').bind('click', function() {
+            if ($("#like").text() == '喜欢'){
+                $.getJSON($SCRIPT_ROOT + '/ajax/like/{{ user.user_id }}', function(data) {
+                    $("#count").text(data.count);
+                    $("#like").text('取消');
+                });
+            }
+            else{
+                $.getJSON($SCRIPT_ROOT + '/ajax/dislike/{{ user.user_id }}', function(data) {
+                    $("#count").text(data.count);
+                    $("#like").text('喜欢');
+                });
+            }
+        });
+    });
+    </script>
+{% endblock %}

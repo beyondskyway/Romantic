@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="header hei4">
+        <div class="left back" onclick="javascript:history.back(-1)">
+            <span><i class="iconfont">&#xf007a;</i></span>
+        </div>
+        <div class="private">上传头像</div>
+    </div>
+    <div style="height:4rem;"></div>
+    {% include 'flash.html' %}
+
+    <div class="container">
+        <div style="background-color: #dff0d8; padding-top: 5px">
+            <span>
+                1.若无法上传可通过右上角<strong>“在浏览器中打开”</strong>上传<br/>
+                2.照片会被切割成正方形<br/>
+                3.天朝流量费太贵，建议wifi环境上传~^^~<br/>
+                4.图片压缩需要时间，刷新可见<br/>
+                5.使用真实头像，额外获得匹配机会
+            </span>
+        </div>
+        <br/>
+        <input name="file" type="file" id='file' style="padding-left: 15px">
+        <br/><br/>
+        <form action="" method="post">
+            <!-- change part -->
+            <div class="imgzip"><input type="hidden" id="base" name="data"></div>
+            <!-- end change -->
+            <div class="container">
+                <button class="btn btn_wide" type="submit" name="上传" id='btn_upload'>上传</button>
+                <a class="btn-btn-primary btn-lg btn-block" href="{{ url_for('profile', user_id=g.user.user_id) }}" role="button"
+                   style="text-align: center;">跳过</a>
+            </div>
+        </form>
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    <script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', init, false);
+    //时间监听事件接受三个参数：事件类型，处理，用户图片。DOMContentLoaded是firefox下特有的Event, 当所有DOM解析完以后会触发这个事件。
+
+
+    function init() {
+        var u = new UploadPic();
+        u.init({
+                   input: document.querySelector('#file'),
+                   callback: function (base64) {
+                       // var html = '';
+
+                       // html =
+                       //     '<div class="itm"><div class="tit">图片预览：</div><div class="cnt"><img src="' + base64 + '"><\/div><\/div>'
+                       //    + '<div class="itm"><div class="tit">Base64编码：</div><div class="cnt"><input type='text' value='+base64+' /></div>';
+                       // <div class="cnt"><textarea>' + base64 + '<\/textarea><\/div><\/div>';
+
+                       document.querySelector('#base').value = base64;
+                   },
+                   loading: function () {
+                       document.querySelector('#base').innerHTML = '读取中，请稍候...';
+                   }
+               });
+    }
+
+    function UploadPic() {   //新建一个函数，设置他的一些属性以及初始值。还设置了两个方法。
+        this.sw = 10;
+        this.sh = 0;
+        this.tw = 0;
+        this.th = 0;
+        this.scale = 0;
+        this.maxWidth = 0;
+        this.maxHeight = 0;
+        this.maxSize = 0;
+        this.fileSize = 0;
+        this.fileDate = null;
+        this.fileType = '';
+        this.fileName = '';
+        this.input = null;
+        this.canvas = null;
+        this.mime = {};
+        this.type = '';
+        this.callback = function () {
+        };
+        this.loading = function () {
+        };
+    }
+
+    UploadPic.prototype.init = function (options) {
+        // 初始参数
+        this.maxWidth = options.maxWidth || 400;
+        this.maxHeight = options.maxHeight || 400;
+        this.maxSize = options.maxSize || 12 * 1024 * 1024;
+        this.input = options.input;
+        this.mime = {'png': 'image/png', 'jpg': 'image/jpeg', 'jpeg': 'image/jpeg', 'bmp': 'image/bmp'};
+        this.callback = options.callback || function () {
+        };
+        this.loading = options.loading || function () {
+        };
+
+        this._addEvent();
+    };
+
+    /**
+     * @description 绑定事件
+     * @param {Object} elm 元素
+     * @param {Function} fn 绑定函数
+     */
+    UploadPic.prototype._addEvent = function () {
+        var _this = this;
+
+        function tmpSelectFile(ev) {
+            _this._handelSelectFile(ev);
+        }
+
+        this.input.addEventListener('change', tmpSelectFile, false);
+    };
+
+    /**
+     * @description 绑定事件
+     * @param {Object} elm 元素
+     * @param {Function} fn 绑定函数
+     */
+    UploadPic.prototype._handelSelectFile = function (ev) {
+        var file = ev.target.files[0];
+
+        this.type = file.type
+
+        // 如果没有文件类型，则通过后缀名判断（解决微信及360浏览器无法获取图片类型问题）
+        if (!this.type) {
+            this.type = this.mime[file.name.match(/\.([^\.]+)$/i)[1]];
+        }
+
+        if (!/image.(png|jpg|jpeg|bmp)/.test(this.type)) {
+            alert('选择的文件类型不是图片');
+            return;
+        }
+
+        if (file.size > this.maxSize) {
+            alert('选择文件大于' + this.maxSize / 1024 / 1024 + 'M，请重新选择');
+            return;
+        }
+
+        this.fileName = file.name;
+        this.fileSize = file.size;
+        this.fileType = this.type;
+        this.fileDate = file.lastModifiedDate;
+
+        this._readImage(file);
+    };
+
+    /**
+     * @description 读取图片文件
+     * @param {Object} image 图片文件
+     */
+    UploadPic.prototype._readImage = function (file) {
+        var _this = this;
+
+        function tmpCreateImage(uri) {
+            _this._createImage(uri);
+        }
+
+        // this.loading();
+
+        this._getURI(file, tmpCreateImage);
+    };
+
+    /**
+     * @description 通过文件获得URI
+     * @param {Object} file 文件
+     * @param {Function} callback 回调函数，返回文件对应URI
+     * return {Bool} 返回false
+     */
+    UploadPic.prototype._getURI = function (file, callback) {
+        var reader = new FileReader();
+        var _this = this;
+
+        function tmpLoad() {
+            // 头不带图片格式，需填写格式
+            var re = /^data:base64,/;
+
+            var ret = this.result + '';
+
+            if (re.test(ret)) ret = ret.replace(re, 'data:' + _this.mime[_this.fileType] + ';base64,');
+
+            callback && callback(ret);
+        }
+
+        reader.readAsDataURL(file);
+        reader.onload = tmpLoad;
+
+        return false;
+    };
+
+    /**
+     * @description 创建图片
+     * @param {Object} image 图片文件
+     */
+    UploadPic.prototype._createImage = function (uri) {
+        var img = new Image();
+        var _this = this;
+
+        function tmpLoad() {
+            _this._drawImage(this);
+        }
+
+        img.onload = tmpLoad;
+
+        img.src = uri;
+    };
+
+    /**
+     * @description 创建Canvas将图片画至其中，并获得压缩后的文件
+     * @param {Object} img 图片文件
+     * @param {Number} width 图片最大宽度
+     * @param {Number} height 图片最大高度
+     * @param {Function} callback 回调函数，参数为图片base64编码
+     * return {Object} 返回压缩后的图片
+     */
+    UploadPic.prototype._drawImage = function (img, callback) {
+        this.sw = img.width;
+        this.sh = img.height;
+        this.tw = img.width;
+        this.th = img.height;
+
+        if (!!document.createElement('canvas').getContext) {
+            this.scale = (this.tw / this.th).toFixed(2);
+
+            if (this.sw > this.maxWidth) {
+                this.sw = this.maxWidth;
+                this.sh = Math.round(this.sw / this.scale);
+            }
+
+            if (this.sh > this.maxHeight) {
+                this.sh = this.maxHeight;
+                this.sw = Math.round(this.sh * this.scale);
+            }
+
+            this.canvas = document.createElement('canvas');
+            var ctx = this.canvas.getContext('2d');
+
+            this.canvas.width = this.sw;
+            this.canvas.height = this.sh;
+
+            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.sw, this.sh);
+
+            this.callback(this.canvas.toDataURL(this.type));
+
+            ctx.clearRect(0, 0, this.tw, this.th);
+            this.canvas.width = 0;
+            this.canvas.height = 0;
+            this.canvas = null;
+        } else {
+
+            this.callback(img.src);
+        }
+    };
+    </script>
+    <script>
+        document.getElementById("btn_upload").onclick = function () {
+            if (document.getElementById("file").value == "") {
+                alert("请选择文件！");
+                return false
+            }
+        }
+    </script>
+{% endblock %}

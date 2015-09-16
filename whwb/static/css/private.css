@@ -1,0 +1,87 @@
+
+.w5{
+    width:6rem;
+	text-align:center;
+}
+.message{
+    height:6rem;
+	position:relative;
+	width:100%;
+	border-bottom:1px solid #E8E5DA;
+	background-color:#FFFFFA;
+}
+.heig5{
+    height:6rem;
+}
+.heig10{
+    height:10rem;
+}
+.message img{
+    height:5rem;
+	width:5rem;
+	border-radius:0.5rem;
+	margin-top:0.5rem;
+}
+.mes{
+	padding-top:0.5rem;
+}
+.bub_time{
+    position:absolute;
+	top:0.5rem;
+	right:0.5rem;
+	color:#ABA695;
+}
+.b{
+    font-size:1.8rem;
+}
+.p{
+    margin-top:-0.7rem;
+    color:#8F8C83;
+	font-size:1.5rem;
+}
+/* c{
+    font-size:1.5rem;
+} */
+.p1{
+    margin-top:0.3rem;
+	color:#8F8C83;
+}
+.p2{
+    padding:1rem 1rem 0rem 1rem;;
+	word-wrap:break-word;
+}
+.message1 img{
+    height:5rem;
+	width:5rem;
+	border-radius:0.5rem;
+	margin-top:0.5rem;
+}
+.message1{
+    height:auto;
+	position:relative;
+	width:100%;
+	border-bottom:1px solid #E8E5DA;
+	background-color:#FFFFFA;
+}
+
+.send{
+    margin-top:0.5rem;
+	height:4rem;
+	margin-left:5%;
+}
+.mess{
+    width:95%;
+    margin: 0 auto;
+}
+.send_mes{
+    bottom:0.8rem;
+	text-align:center;
+	width:100%;
+	margin-top:0.5rem;
+}
+.height100{
+    height:100%;
+	background-color:#F4F4F4;
+}
+
+

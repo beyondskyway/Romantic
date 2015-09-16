@@ -1,0 +1,45 @@
+
+.header{
+	margin-top:-1rem;
+	}
+.center{
+ 	vertical-align:middle;
+	border:none;
+	margin-top:1rem;
+	height:5rem;
+    font-size:1.7rem;
+}
+.h4{
+    font-size:1.7rem;
+    height:3rem;
+    padding:0.5rem;
+	background-color:rgba(55,55,55,0);
+	color:#FEDDA0;
+	line-height:2rem;
+	border:1px solid #FEDDA0;
+	outline:none;
+}
+.p0{padding:0px;
+	display:inline-block;
+	vertical-align:middle;
+}
+.mr{margin-right:-0.25rem;}
+.ml{margin-left:-0.25rem;}
+
+.clck{
+    background-color: #FEDDA0;
+	color:#DC8F83;
+}
+.more_btn1,.more_btn2{
+    margin-bottom:4rem;
+	margin-top:0.5rem;
+	text-align:center;
+}
+.w62{
+    width:62%;
+}
+.btn_define{
+    background-color:#FF6E8B;
+	color:white;
+}
+

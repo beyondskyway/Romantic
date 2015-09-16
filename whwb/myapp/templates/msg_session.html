@@ -1,0 +1,77 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/private.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+    <div class="header hei5">
+	    <div class="private">我的私信</div>
+	</div>
+    {% if not sessions %}
+        <div style="text-align:center; color: gainsboro">
+            <h3>这里空空如也!</h3>
+        </div>
+    {% endif %}
+    {% for session in sessions %}
+    {% if session.from_id == g.user.id %}
+        <div class="message clear heig5"  onclick="location.href='{{ url_for('message', user_id = session.to_user.user_id) }}'">
+            <div class="left w5">
+                <a href="{{ url_for('profile', user_id = session.to_user.user_id) }}">
+                    <img src="{{ session.to_user.avatar_path }}" />
+                </a>
+            </div>
+            <div class="mes left">
+                    <div class="b">
+                        <p>
+                            {{ session.to_user.nickname }}
+                        </p>
+                    </div>
+                    <div class="p">
+                        {{ session.latest_msg()|string|truncate(15,killwords=True,end='...')}}
+                    </div>
+            </div>
+            <div class="bub_time">{{ session.timestamp|datetimeformat }}</div>
+        </div>
+    {% else %}
+        <div class="message clear heig5" onclick="location.href='{{ url_for('message', user_id = session.from_user.user_id) }}'">
+            <div class="left w5">
+                <a href="{{ url_for('profile', user_id = session.from_user.user_id) }}">
+                    <img src="{{ session.from_user.avatar_path }}" />
+                </a>
+            </div>
+            <div class="mes left">
+                    <div class="b">
+                        <p>
+                            {{ session.from_user.nickname }}
+                        </p>
+                    </div>
+                    <div class="p">
+                        {{ session.latest_msg()|string|truncate(15,killwords=True,end='...')}}
+                    </div>
+            </div>
+            <div class="bub_time">{{ session.timestamp|datetimeformat }}</div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    <div style="height:5rem;"></div>
+    <div class="footer">
+        <a href="{{ url_for('index') }}" class="btn ib">
+            <i class="iconfont">&#xe634;</i><br/>
+            <div class="nav_word">主页</div>
+        </a>
+        <a href="{{ url_for('likes') }}" class="btn ib">
+            <i class="iconfont ">&#xe73c;</i><br/>
+            <div class="nav_word">喜欢</div>
+        </a>
+        <a href="{{ url_for('session') }}" class="btn ib btn_active">
+            <i class="iconfont ">&#xe631;</i><br/>
+            <div class="nav_word">私信</div>
+        </a>
+        <a href="{{ url_for('userinfo') }}" class="btn ib">
+            <i class="iconfont ">&#xe627;</i><br/>
+            <div class="nav_word">我</div>
+        </a>
+    </div>
+{% endblock %}

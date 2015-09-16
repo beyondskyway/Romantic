@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+{#    {{ moment.include_moment() }}#}
+{#    {{ moment.lang('zh-cn') }}#}
+    <link rel="stylesheet" href="/static/css/fate.css"/>
+{% endblock %}
+{% block content %}
+    <header>
+        <div class="header_left">
+            <img src="/static/img/logo2.jpg"/>
+
+            <p>缘分社区</p>
+        </div>
+        <div class="header_right">
+            <a href="{{ url_for('match') }}"><button>筛选</button></a>
+        </div>
+    </header>
+    <!-- match_content start -->
+    <div id="loveme">
+        <div id="one">
+        </div>
+        {% if length > 10 %}
+        <div class="more_btn" id="load_more">
+            <button class="btn btn_define">加载更多</button>
+        </div>
+        {% endif %}
+        <div style="text-align: center">
+            <h4 id="no_more" style="color: darkgray ;display: none">没有更多了哦</h4>
+        </div>
+        <div style="height:5rem;"></div>
+    </div>
+    <div id = "data" style="display: none">{{users}}</div>
+    <div class="footer">
+        <a href="{{ url_for('index') }}" class="btn ib btn_active">
+            <i class="iconfont">&#xe634;</i><br/>
+            <div class="nav_word">主页</div>
+        </a>
+        <a href="{{ url_for('likes') }}" class="btn ib">
+            <i class="iconfont ">&#xe73c;</i><br/>
+            <div class="nav_word">喜欢</div>
+        </a>
+        <a href="{{ url_for('session') }}" class="btn ib">
+            <i class="iconfont ">&#xe631;</i><br/>
+            <div class="nav_word">私信</div>
+        </a>
+        <a href="{{ url_for('userinfo') }}" class="btn ib">
+            <i class="iconfont ">&#xe627;</i><br/>
+            <div class="nav_word">我</div>
+        </a>
+    </div>
+    <script>
+    $(document).ready(function(){
+    var users_data = $('#data').text();
+    users_data = JSON.parse(users_data);
+    var length = users_data.length;
+    var num=10;
+    var count=0;
+    function load() {
+        count++;
+        for (var i = (count - 1) * num; i < count * num; i++) {
+            if(i >= length){
+                // 隐藏“加载更多”
+                $("#load_more").hide();
+                // 显示“没有更多”
+                if (length > 10){
+                    $("#no_more").show();
+                }
+                return false;
+                break;
+            }
+            var add =
+                    "<div class='match_content clear'>" +
+                        "<div class='match_guest'>" +
+                            "<div class='guest'>" +
+                                "<div class='img left'>"+
+                                    "<a href='"+ users_data[i].url +"'>" +
+                                        "<img src='" + users_data[i].img + "'/>" +
+                                    "</a>" +
+                                "</div>" +
+                                "<div class='brief_message mr20'>" +
+                                    "<a href='"+ users_data[i].url +"'>" +
+                                        "<ul>" +
+                                            "<li><span class='c1'>" + users_data[i].nickname + "</span></li>" +
+                                        "</ul>" +
+                                        "<ul>";
+                                        if(users_data[i].sex == '\u7537' ){
+                                        var add2="<li><span class='message_middle man'>" + users_data[i].sex + " " + users_data[i].age + "</span></li>"+
+                                            "<li><span class='message_middle c4'>" + users_data[i].degree + "</span></li>" +
+                                            "<li><span class='message_middle c5'>" + users_data[i].other + "</span></li>" ;
+                                        }else{
+                                        var add2="<li><span class='message_middle woman'>" + users_data[i].sex + " " + users_data[i].age + "</span></li>"+
+                                            "<li><span class='message_middle c4'>" + users_data[i].degree + "</span></li>" +
+                                            "<li><span class='message_middle c5'>" + users_data[i].other + "厘米</span></li>" ;
+                                        }
+                                        var add3=
+                                        "</ul>" +
+                                        "<p class='c6'>" + users_data[i].introduce + "</p>" +
+                                    "</a>" +
+                                "</div>" +
+                                "<div class='bubbling_time'>" + users_data[i].last_seen +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
+				    "</div>";
+            $("#one").append(add+add2+add3);
+        }
+    }
+    $(".more_btn").click(function(){
+        load();
+	});
+    load();
+    });
+    </script>
+{% endblock %}

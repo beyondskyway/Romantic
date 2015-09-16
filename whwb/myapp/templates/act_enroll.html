@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>武汉晚报遇见</title>
+    <link href="/static/css/apply.css" rel="stylesheet"/>
+    <link href="/static/enroll/iconfont.css" rel="stylesheet"/>
+    <link href="/static/css/share.css" rel="stylesheet"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<!-- page_applied start -->
+<div class="header hei4">
+    <div class="private">活动报名</div>
+</div>
+<div style="height:4rem;"></div>
+<!-- activity_information start -->
+{% if activity %}
+    <div class="profile_message">
+    <div style="text-align: center">
+        <img style="text-align: center; width: 95%" src="{{ activity.poster }}">
+    </div>
+    <div class="user_information">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-info" role="alert">{{ message|safe }}</div>
+        {% endfor %}
+        {% if number %}
+            <div class="alert alert-info" role="alert">
+                <p>您已经报名该线下活动！您的编号为<strong>{{ number }}</strong>，赶紧分享到朋友圈让跟多朋友参与进来吧！</p>
+            </div>
+        {% endif %}
+        <h4 class="pleft"><strong>活动名称</strong>&nbsp;<i class="iconfont">&#xe601;</i></h4>
+
+        <div class="basic_mes pad">{{ activity.name }}</div>
+        <h4 class="pleft"><strong>活动时间</strong>&nbsp;<i class="iconfont">&#xe60c;</i></h4>
+
+        <div class="basic_mes pad">{{ activity.time }}</div>
+        <h4 class="pleft"><strong>活动地点</strong>&nbsp;<i class="iconfont">&#xe6bb;</i></h4>
+
+        <div class="basic_mes pad">{{ activity.address }}</div>
+        <h4 class="pleft"><strong>活动简介</strong>&nbsp;<i class="iconfont">&#xe61d;</i></h4>
+
+        <div class="basic_mes pad">{{ activity.introduce }}</div>
+        <h4 class="pleft"><strong>现场嘉宾</strong>&nbsp;<i class="iconfont">&#xe608;</i></h4>
+
+        <div class="basic_mes pad">{{ activity.guest }}</div>
+        {% if auth %}
+            <!-- user_information start -->
+            <h4 class="pleft"><strong>您的资料</strong></h4>
+            <div class="basic_mes">
+                <div class="borderB">姓名<span class="right">{{ g.user.name }}</span></div>
+                <div class="borderB">电话<span class="right">{{ g.user.phone }}</span></div>
+                <div class="borderB">年龄<span class="right">{{ g.user.age }}岁</span></div>
+                <div class="borderB">身高<span class="right">{{ g.user.height }}cm</span></div>
+                <div class="borderB">学历<span class="right">{{ g.user.degree }}</span></div>
+                <div class="borderB">月薪<span class="right">{{ g.user.income }}元</span></div>
+                <div class="borderB">婚姻状态<span class="right">{{ g.user.status }}</span></div>
+                <div class="borderB">房车<span class="right">{{ g.user.condition }}</span></div>
+            </div>
+            <div style="height:5rem;"></div>
+            <!-- user_information end -->
+            {% if share %}
+                <footer class="fix_bottom">
+                    <a href="{{ url_for('edit', page=1) }}" role="button" class="btn btn_define2">修改资料</a>
+                    <button id="share" class='btn btn_define2'>分享到朋友圈</button>
+                </footer>
+            {% else %}
+                <footer class="fix_bottom">
+                    <a href="{{ url_for('enroll', flag=1) }}" role="button" class="btn btn_define2">立即报名</a>
+                    <a href="{{ url_for('edit', page=1) }}" role="button" class="btn btn_define2">修改资料</a>
+                </footer>
+            {% endif %}
+
+        {% else %}
+            <!-- user_alert start -->
+            <div class="user_alert">
+                <p>本次活动需要先注册，请认真填写资料，注册后您不仅可以报名本次活动，在"缘分社区"中您还可以联系其他用户。</p>
+            </div>
+            <div style="height:5rem;"></div>
+            <!-- user_alert end -->
+            <footer class="fix_bottom">
+                <a href="{{ url_for('registry', page=1) }}" role="button" class="btn btn_define2">立即注册</a>
+                <button id="share" class='btn btn_define2'>分享到朋友圈</button>
+            </footer>
+        {% endif %}
+        <div id="cover" class='cover hidden'></div>
+    </div>
+    </div>
+{% else %}
+    <div style="text-align:center; color: gainsboro">
+        <h3>暂时没有活动哦!</h3>
+    </div>
+{% endif %}
+<script src="/static/js/share.js"></script>
+</body>
+</html>

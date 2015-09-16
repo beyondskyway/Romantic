@@ -1,0 +1,73 @@
+ .guest{
+    height:7rem;
+	position:relative;
+	width:100%;
+	background-color:#FFFFFA;
+	border-bottom:1px solid #E8E5DA;
+ }
+ .img{
+    width:8rem;
+	height:7rem;
+	text-align:center;
+ }
+ .match_guest img{
+    border-radius:1rem;
+    width:6rem;
+	height:auto;
+}
+.left{float:left;}
+.right{float:right;}
+.brief_message{
+	text-algin:center;
+	height:7rem;
+}
+.brief_message ul{
+    padding:0px;
+	margin:0.3rem 0px;
+}
+.brief_message ul li{
+    display:inline-block;
+	padding:0 5px 0 0;
+}
+.message_middle{
+	font-weight:bold;
+	color:white;
+	border-radius:5px;
+	padding:0.1rem;
+}
+.c1{
+    color:#000100;
+	font-size:1.5rem;
+}
+.woman{
+    font-size:0.9rem;
+    background-color:#FEA5B9;
+}
+.man{
+    font-size:0.9rem;
+    background-color:#8AC5F8;
+}
+/* 姓名、性别、状态、收入等的标签形式style */
+.c4{
+    font-size:0.9rem;
+    background-color:#BCB6C5;
+}
+.c5{
+    font-size:0.9rem;
+    background-color:#AF8DFD;
+}
+.c6{
+    font-size:1.2rem;
+	padding-top:0.1rem;
+	color:#8F8C83;
+}
+/* 姓名、性别、状态、收入等的标签形式style end */
+.bubbling_time{
+    position:absolute;
+	right:0.8em;
+	top:0rem;
+	color:#ABA695;
+	font-size:1.2rem;
+}
+.pl20{padding-left:10px;}
+.pr20{padding-right:10px;}

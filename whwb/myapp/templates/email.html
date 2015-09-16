@@ -1,0 +1,20 @@
+<p>亲爱的 {{to_user.nickname}},</p>
+<span style="color:#d84c31; font-weight:bold">{{from_user.nickname}}</span>{{content}}</br>
+<table>
+    <tr valign="top">
+        <td><img src="{{from_user.avatar_path}}" width="60px" height="60px" /></td>
+        <td>
+            <p>{{from_user.nickname}}</p>
+            {% if from_user.declare == ""%}
+            <p>&nbsp;</p>
+            {% else %}
+            <p>宣言：{{from_user.declare}}</p>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+<div style="color:#ccc; margin: 40px 0 0 0">
+这是一封系统邮件，请勿回复！
+</div>
+<span style="color:#aaa;float:right; height:40px;line-height:40px;">来自：<p style="color:#aaa; text-decoration: none;" target="_blank">武汉晚报遇见</p>
+</span>

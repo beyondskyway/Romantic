@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/option.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="header hei4">
+    <div class="left back" onclick="javascript:history.back(-1)" style="height:4rem;width:2rem;z-index:99;">
+        <span><i class="iconfont">&#xf007a;</i></span>
+    </div>
+    <div class="private">筛选</div>
+</div>
+<div class="option">
+    <form class="form-horizontal" role="form" action="" method="post">
+        <div class="option_if">
+            <div class="w50 left">
+                <div class="w100left">年龄在
+                    <select class="ot" id="begin_age" name="begin_age">
+                        {% for val in range(16,61) %}
+                            <option value="{{ val }}" {% if val==begin_age %}selected{% endif %}>{{ val }}</option>
+                        {% endfor %}
+                    </select>到
+                    <select class="ot" id="end_age" name="end_age">
+                        {% for val in range(16,61) %}
+                            <option value="{{ val }}" {% if val==end_age %}selected{% endif %}>{{ val }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="w100left">月薪大于
+                    <select class="ot" id="income" name="income">
+                        <option value="不限" {% if income=="不限" %}selected{% endif %}>不限</option>
+                        <option value="3000元" {% if income=="3000" %}selected{% endif %}>3000</option>
+                        <option value="5000元" {% if income=="5000" %}selected{% endif %}>5000</option>
+                        <option value="8000元" {% if income=="8000" %}selected{% endif %}>8000</option>
+                    </select>元
+                </div>
+                <div class="w100left">房子&nbsp;&nbsp;
+                    <input type="checkbox" name="house" id="house" value="option1">
+                </div>
+            </div>
+            <div class="w50 left">
+                <div class="w100right">身高大于
+                    <select class="ot" id="height" name="height">
+                        {% for val in range(150,190, 1) %}
+                            <option value="{{ val }}" {% if val==height %}selected{% endif %}>{{ val }}</option>
+                        {% endfor %}
+                    </select>厘米
+                </div>
+                <div class="w100right">学历至少
+                    <select class="ot" id="degree" name="degree">
+                        <option value="大专" {% if degree=="大专" %}selected{% endif %}>大专</option>
+                        <option value="本科" {% if degree=="本科" %}selected{% endif %}>本科</option>
+                        <option value="硕士" {% if degree=="硕士" %}selected{% endif %}>硕士</option>
+                        <option value="博士" {% if degree=="博士" %}selected{% endif %}>博士</option>
+                    </select>
+                </div>
+                <div class="w100right">车子&nbsp;&nbsp;
+                    <input type="checkbox" name="car" id="car" value="option2">
+                </div>
+            </div>
+        </div>
+        <div class="more_btn"><button id="submit" class="btn btn_define" >开始筛选</button></div>
+    </form>
+</div>
+
+<div id="match">
+    <!-- match_content start -->
+    <!-- match_content start -->
+</div>
+<div class="more_btn" id="load_more" style="display: none">
+    <button class="btn btn_define">加载更多</button>
+</div>
+<div style="text-align: center">
+    <h4 id="no_more" style="color: darkgray ;display: none">没有更多了哦</h4>
+</div>
+<div style="text-align: center">
+    <h4 id="no_match" style="color: darkgray ;display: none">没有符合条件的哦</h4>
+</div>
+<script>
+    $('#submit').click(function () {
+        $("#match").empty();
+        $("#load_more").hide();
+        $("#no_more").hide();
+        $("#no_match").hide();
+        $.ajax({
+                   url: '{{ url_for("match") }}',
+                   type: 'POST',
+                   data: {
+                       match: 'match',
+                       begin_age: $('#begin_age option:selected').text(),
+                       end_age: $('#end_age option:selected').text(),
+                       height: $('#height').val(),
+                       income: $('#income option:selected').text(),
+                       house: $('#house').is(':checked'),
+                       car: $('#car').is(':checked'),
+                       degree: $('#degree option:selected').text()
+                   }
+               })
+        .done(function(data) {
+            if(data === 'error') {
+                alert('加载失败，请稍候再试');
+                return false;
+            }
+            var users_data = JSON.parse(data);
+            var len=users_data.length;
+            var count=0;
+            var num=10;
+            function load() {
+                count++;
+                for (var i = (count - 1) * num; i < count * num - 1; i++) {
+                    if(i >= len) {
+                        if (len == 0){
+                            $("#no_match").show();
+                        }
+                        // 隐藏“加载更多”
+                        $("#load_more").hide();
+                        // 显示“没有更多”
+                        if (len > 10){
+                            $("#no_more").show();
+                        }
+                        return false;
+                    }
+                    var add =
+                            "<div class='match_content clear'>" +
+                                "<div class='match_guest'>" +
+                                    "<div class='guest'>" +
+                                        "<div class='img left'>"+
+                                            "<a href='"+ users_data[i].url +"'>"+
+                                                "<img src='" + users_data[i].img + "'/>"+
+                                            "</a>" +
+                                        "</div>" +
+                                        "<div class='brief_message mr20'>" +
+                                            "<a href='"+ users_data[i].url +"'>"+
+                                                "<ul>" +
+                                                    "<li><span class='c1'>" + users_data[i].nickname + "</span></li>" +
+                                                "</ul>" +
+                                                "<ul>";
+                                                if(users_data[i].sex == '\u7537' ){
+                                                    var add2=
+                                                        "<li><span class='message_middle man'>" + users_data[i].sex + " " + users_data[i].age + "</span></li>"+
+                                                        "<li><span class='message_middle c4'>" + users_data[i].degree + "</span></li>" +
+                                                        "<li><span class='message_middle c5'>" + users_data[i].other + "</span></li>" ;
+                                                }else{
+                                                    var add2=
+                                                        "<li><span class='message_middle woman'>" + users_data[i].sex + " " + users_data[i].age + "</span></li>"+
+                                                        "<li><span class='message_middle c4'>" + users_data[i].degree + "</span></li>" +
+                                                        "<li><span class='message_middle c5'>" + users_data[i].other + "厘米</span></li>" ;
+                                                }
+                                                var add3=
+                                                "</ul>" +
+                                                "<p class='c6'>" + users_data[i].introduce + "</p>" +
+                                            "</a>" +
+                                        "</div>" +
+                                        "<div class='bubbling_time'>" + users_data[i].last_seen +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>";
+                    $("#match").append(add+add2+add3);
+                }
+            }
+            // 显示“加载更多”
+            if (len > 10){
+                $("#load_more").show();
+                $("#no_more").hide();
+            }
+            load();
+            $("#load_more").click(function(){
+                load();
+            });
+{#        alert(data);#}
+        });
+        return false;
+    });
+</script>
+
+{% endblock %}

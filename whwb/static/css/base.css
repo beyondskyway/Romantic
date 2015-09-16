@@ -1,0 +1,177 @@
+*{margin:0;padding:0;}
+body html{
+    font-size:62.5%;
+	width:100%;
+	height:100%;	
+}
+.clear{
+    clear:both;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+/* 导航栏 start */
+.header{
+	background:#FC9BBE;
+	text-align:center;
+	color:white;
+	width:100%;
+/*     height:5rem;
+    line-height:5rem; */
+}
+.hei5{
+    height:5rem;
+    line-height:5rem;
+	font-size:2rem;
+}
+.hei4{
+    height:4rem;
+    line-height:4rem;
+    position:fixed;
+	top:0rem;
+	z-index:99;
+	font-size:2rem;
+}
+
+.back{
+    position:absolute;
+	left:0.2rem;
+	width:2rem;
+	height:4rem;
+}
+/* 导航栏 end */
+
+/* guest 公用的css start */
+ .match_guest{
+    padding-top:0.8rem;
+    background-color:#FFFFFA;
+ }
+.match_guest a{
+    display:block;
+    width:100%;
+ }
+.match_guest a:active,.match_guest>li:active,.match_guest>p:active{
+    text-decoration:none;
+}
+.match_guest a:hover,.match_guest>li:hover,.match_guest>p:hover{
+    text-decoration:none;
+}
+ .guest{
+    height:7rem;
+	position:relative;
+	width:100%;
+	border-bottom:1px solid #E8E5DA;
+ }
+ .img{
+    width:8rem;
+	height:7rem;
+	text-align:center;
+ }
+ .match_guest img{
+    border-radius:1rem;
+    width:6rem;
+	height:6rem;
+}
+.left{float:left;}
+.right{float:right;}
+.brief_message{
+/* 	text-algin:center; */
+	height:7rem;
+    margin-left:8rem;
+}
+.brief_message ul{
+    padding:0px;
+	margin:0.3rem 0px;
+}
+.brief_message ul li{
+    display:inline-block;
+	padding:0 5px 0 0;
+}
+.message_middle{
+	font-weight:bold;
+	color:white;
+	border-radius:5px;
+	padding:0.1rem;
+}
+.c1{
+    color:#000100;
+	font-size:1.5rem;
+}
+.woman{
+    font-size:0.9rem;
+    background-color:#FEA5B9;
+}
+.man{
+    font-size:0.9rem;
+    background-color:#8AC5F8;
+}
+/* 姓名、性别、状态、收入等的标签形式style */
+.c4{
+    font-size:0.9rem;
+    background-color:#BCB6C5;
+}
+.c5{
+    font-size:0.9rem;
+    background-color:#AF8DFD;
+}
+.c6{
+    font-size:1.2rem;
+	padding-top:0.1rem;
+	color:#8F8C83;
+}
+/* 姓名、性别、状态、收入等的标签形式style end */
+.bubbling_time{
+    position:absolute;
+	right:0.8em;
+	top:0rem;
+	color:#ABA695;
+	font-size:1.2rem;
+}
+.pl20{padding-left:10px;}
+.pr20{padding-right:10px;}
+/* guest 公用的css end */
+
+/*  底部导航栏 start */
+.footer{
+	position:fixed;
+	bottom:0rem;
+	width:100%;
+	text-align:center;
+	background-color:#FC9BBE;
+	height:4.5rem;
+	padding:0 0 20px 0;
+
+}
+.ib{
+    display:inline-block;
+	width:23%;
+	background-color:rgba(55,55,55,0);
+	color:white;
+	z-index:99;
+	outline:none;
+	height:4.5rem;
+	font-size:10px;
+	padding:0 0 20px 0;
+}
+.nav_word{
+    line-height:0px;
+}
+/* 取消链接下划线 */
+a:active{
+    text-decoration:none;
+}
+/*  底部导航栏 end */
+ 
+/* 针对按钮点击后 */
+
+
+
+
+
+
+
+
+
