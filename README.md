@@ -1,8 +1,8 @@
-WHWB
+#武汉晚报遇见
 ---
-基于Python+Flask，部署在SAE上的大型恋爱、交友社区
+基于Python+Flask，部署在SAE上的大型O2O恋爱、交友社区
 
-Deployment
+##Deployment
 ---
 - 使用SAE的Storage+Cron+DeferredJob+MySQL和SQLAlchemy开发环境
 - 基于SendCloud邮件服务的的邮件系统
@@ -15,9 +15,6 @@ Deployment
 - 通过`/create`创建数据库和迁移版本
 
 
-##Docs
-
-
 ###Atention
 - 数据库迁移牵涉外键、索引、默认值需逐步迁移
 
@@ -26,5 +23,4 @@ Deployment
 
 
 ##WEBsite
-演示网站：
-[juewangpo.sinaapp.com](http://juewangpo.sinaapp.com)
+[武汉晚报遇见](http://whwb.sinaapp.com/)
