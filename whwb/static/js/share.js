@@ -3,10 +3,10 @@
  */
 
 /*============================= WeiXin Share ======================================*/
-var imgUrl = 'http://whwb.vipsinaapp.com/static/img/logo2.jpg';  //pic
-var lineLink = 'http://whlove.vipsinaapp.com/store'; //网址
-var descContent = '武汉晚报遇见，这里是武汉乃至全国最具影响力的婚恋服务平台，欢迎你的加入！'; //内容
-var shareTitle = '武汉晚报遇见——线下大型相亲活动等你来'; //标题
+var imgUrl = 'http://xxx.vipsinaapp.com/static/img/logo2.jpg';  //pic
+var lineLink = 'http://xxx.vipsinaapp.com/store'; //网址
+var descContent = '武汉xxx，这里是武汉乃至全国最具影响力的婚恋服务平台，欢迎你的加入！'; //内容
+var shareTitle = '武汉xxx——线下大型相亲活动等你来'; //标题
 var appid = 'Joey';
 
 function shareFriend() {

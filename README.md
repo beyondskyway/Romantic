@@ -21,6 +21,3 @@
 
 ###Modify Log
 
-
-##WEBsite
-[武汉晚报遇见](http://whwb.sinaapp.com/)

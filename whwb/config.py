@@ -24,12 +24,12 @@ STATUS = [(u'单身', u'单身'), (u'离异', u'离异'), (u'丧偶', u'丧偶')
 
 
 # MYSQL配置信息  by Lee 14.7.17 19:44
-MYSQL_USER = 'root'
-MYSQL_PASS = 'qwertyuiop'
+MYSQL_USER = ''
+MYSQL_PASS = ''
 MYSQL_HOST = '127.0.0.1'
 MYSQL_HOST_S = '127.0.0.1'
 MYSQL_PORT = '3306'
-MYSQL_DB = 'whwb'
+MYSQL_DB = ''
 
 
 # 迁移数据库。不是太懂，仅本地测试方便，线上不能用。 add by lee @ 14.7.23
@@ -61,7 +61,7 @@ if ENVIRONMENT == 'OFFLINE':
 else:
     from sae.const import (MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB)
     SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s?charset=utf8' % (MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_PORT, MYSQL_DB)
-    AVATARURL = "http://whwb.vipsinaapp.com/upavatar"
+    AVATARURL = ""
 
 # 源于SAE python Q&A 更改连接池，防止 MYSQL gone away
 SQLALCHEMY_POOL_RECYCLE = 5

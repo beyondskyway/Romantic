@@ -707,11 +707,11 @@ def forget_pwd():
         user = User.query.filter_by(qq=form.qq.data).first()
         if user is not None:
             email = user.qq + '@qq.com'
-            content = u"您在武汉晚报遇见的账户信息如下："
-            subject = u"找回密码——武汉晚报遇见"
+            content = u"您在武汉xxx的账户信息如下："
+            subject = u"找回密码——武汉xxx"
             html = render_template("login_info_email.html", user=user, content=content)
             sc_mail([email], subject, html)
-            flash(u"用户名和密码已发送到QQ邮箱！可能会被误认为垃圾邮件，确定没收到请加微信BeyondSkyWay")
+            flash(u"用户名和密码已发送到QQ邮箱！可能会被误认为垃圾邮件，确定没收到请加微信xxx")
             return redirect(url_for('login'))
         else:
             flash(u"该用户不存在！")
@@ -737,7 +737,7 @@ def backup():
     db.session.commit()
     notice = u'备份提交！<br>%s' % notice
     # 发送备份提交邮件
-    html_mail(config.BACKUP_TO_MAIL, 'whwb-数据库备份', notice, config.MAIL_SMTP)
+    html_mail(config.BACKUP_TO_MAIL, 'xxx-数据库备份', notice, config.MAIL_SMTP)
     return notice
 
 

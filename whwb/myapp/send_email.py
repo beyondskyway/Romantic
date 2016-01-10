@@ -49,15 +49,15 @@ def html_mail(to, subject, html, smtp):
 
 # 关注邮件通知
 def follow_notification(followed, follower):
-    content = u"在武汉高校之恋中羞涩的关注了你！"
+    content = u"在武汉xxx中羞涩的关注了你！"
     html_mail(followed.email,
-              u"关注提醒——武汉高校之恋",
+              u"关注提醒——武汉xxx",
               render_template("email.html", to_user=followed, from_user=follower, content=content), config.MAIL_SMTP)
 
 
 # 私信邮件通知
 def pri_msg_notification(from_user, to_user):
-    content = u"在武汉高校之恋中给你发了一丢丢封私信！"
+    content = u"在武汉xxx中给你发了一丢丢封私信！"
     html_mail(to_user.email,
-              u"私信提醒——武汉高校之恋",
+              u"私信提醒——xxx",
               render_template("email.html", to_user=to_user, from_user=from_user, content=content), config.GMAIL_SMTP)

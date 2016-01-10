@@ -13,17 +13,16 @@ APP_TOKEN = ''
 
 #欢迎语
 STR_SUB = """
-欢迎关注“武汉晚报遇见”！我们是武汉乃至全国最具影响力的婚恋服务平台，期待您的持续关注。
-点击<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDE4NzU3NQ==&mid=202381609&idx=1&sn=f4e3999ed6df1e32341f33c25790630d#rd">关于我们</a>了解我们平台，
-您可直接回复来与我们交流，也可通过历史消息查看之前的文章……
+欢迎关注“xxx”！我们是武汉乃至全国最具影响力的婚恋服务平台，期待您的持续关注。
+点击您可直接回复来与我们交流，也可通过历史消息查看之前的文章……
 """
 
 #帮助
 STR_HELP = """
 回复'h'或'帮助'呼出帮助菜单：
 
-┄点击<a href="http://whwb.vipsinaapp.com/enroll">我要相亲</a>，可直接报名参加线下活动
-┄点击<a href="http://whwb.vipsinaapp.com/index">缘分社区</a>，可进入我们的缘分社区畅聊
+┄点击<a href="">我要相亲</a>，可直接报名参加线下活动
+┄点击<a href="">缘分社区</a>，可进入我们的缘分社区畅聊
 
 ┄回复'tq'可查看最近天气情况
 
@@ -98,26 +97,26 @@ MENU = """
         {
             "type":"view",
             "name":"我要相亲",
-            "url":"http://whwb.vipsinaapp.com/enroll"
+            "url":""
         },
         {
             "type":"view",
             "name":"往期回顾",
-            "url":"http://mp.weixin.qq.com/s?sn=e9058cab7bc308136b38e6aad910ce35&mid=202381233&idx=1&plg_auth=1&__biz=MzA3NDE4NzU3NQ%3D%3D#rd"
+            "url":""
         }]
     },
     {
         "type":"view",
         "name":"缘分社区",
-        "url":"http://whwb.vipsinaapp.com/index"
+        "url":""
     },
     {
         "name":"更多惊喜",
         "sub_button":[
         {
             "type":"view",
-            "name":"求助米特",
-            "url":"http://mp.weixin.qq.com/s?__biz=MzA3NDE4NzU3NQ==&mid=202381012&idx=1&sn=b255117b7e1c27db26e2b46d7387445a#rd"
+            "name":"求助",
+            "url":""
         },
         {
             "type":"click",
@@ -127,12 +126,12 @@ MENU = """
         {
             "type":"view",
             "name":"甜蜜兑换券",
-            "url":"http://mp.weixin.qq.com/s?__biz=MzA3NDE4NzU3NQ==&mid=202388456&idx=1&sn=4669990cc9fa33cb077423eaa5de76d9#rd"
+            "url":""
         },
         {
             "type":"view",
             "name":"关于我们",
-            "url":"http://mp.weixin.qq.com/s?__biz=MzA3NDE4NzU3NQ==&mid=202381609&idx=1&sn=f4e3999ed6df1e32341f33c25790630d#rd"
+            "url":""
         }]
     }]
 }
